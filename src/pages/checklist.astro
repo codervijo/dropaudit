@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ChecklistPage } from "@/components/pages/ChecklistPage";
+---
+<BaseLayout
+  title="DROP Readiness Checklist — DROPShield"
+  description="A practical, free DROP readiness checklist for California-registered data brokers. Score your compliance posture before August 1, 2026."
+  ogTitle="DROP Readiness Checklist"
+  ogDescription="Score your DROP / Delete Act readiness before August 1, 2026."
+  path="/checklist"
+>
+  <ChecklistPage client:load />
+</BaseLayout>

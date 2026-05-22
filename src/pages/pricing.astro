@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { PricingPage } from "@/components/pages/PricingPage";
+---
+<BaseLayout
+  title="Pricing — DROPShield DROP compliance plans"
+  description="Transparent pricing for California data brokers. Starter, Compliance, and Enterprise tiers for DROP / Delete Act readiness and operations."
+  ogTitle="DROPShield pricing"
+  ogDescription="Plans for DROP readiness, suppression, vendor routing, and audit exports."
+  path="/pricing"
+>
+  <PricingPage client:load />
+</BaseLayout>

@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ContactPage } from "@/components/pages/ContactPage";
+---
+<BaseLayout
+  title="Contact DROPShield — DROP / Delete Act compliance"
+  description="Talk to the DROPShield team about DROP readiness, pricing, and onboarding for your California data broker."
+  ogTitle="Contact DROPShield"
+  ogDescription="Get in touch with the DROPShield compliance team."
+  path="/contact"
+>
+  <ContactPage client:load />
+</BaseLayout>

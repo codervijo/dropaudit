@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { CalculatorPage } from "@/components/pages/CalculatorPage";
+---
+<BaseLayout
+  title="DROP Penalty Calculator — DROPShield"
+  description="Estimate your California DROP / Delete Act penalty exposure at $200 per request, per day. Free calculator for data brokers."
+  ogTitle="DROP Penalty Calculator"
+  ogDescription="Quantify your DROP exposure at $200/request/day in real time."
+  path="/calculator"
+>
+  <CalculatorPage client:load />
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+import "@/styles/global.css";
+
+const site = "https://dropaudit.co";
+
+export interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  path?: string;
+}
+
+const {
+  title,
+  description,
+  ogTitle = title,
+  ogDescription = description,
+  path = "/",
+} = Astro.props;
+
+const canonical = new URL(path, site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="DROPShield" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="DROPShield" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+
+    <script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://dropaudit.co/#organization",
+      "name": "DROPShield",
+      "url": "https://dropaudit.co/"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dropaudit.co/#website",
+      "url": "https://dropaudit.co/",
+      "name": "DROPShield",
+      "publisher": { "@id": "https://dropaudit.co/#organization" }
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

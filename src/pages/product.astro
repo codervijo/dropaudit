@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ProductPage } from "@/components/pages/ProductPage";
+---
+<BaseLayout
+  title="Product — DROPShield compliance workflow for California data brokers"
+  description="See how DROPShield operationalizes every step of the California DROP / Delete Act workflow — from list intake through audit-ready evidence."
+  ogTitle="Inside the DROPShield compliance workflow"
+  ogDescription="Intake, matching, deletion, vendor routing, evidence export — built for California data brokers."
+  path="/product"
+>
+  <ProductPage client:load />
+</BaseLayout>
