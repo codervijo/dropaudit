@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dropaudit.co/sitemap.xml
+Sitemap: https://dropaudit.co/sitemap-index.xml
