@@ -64,3 +64,29 @@ https://search.google.com/search-console directly.
 - **Action:** project scaffolded via `portfolio new bootstrap`; first deploy pending. After deploy: verify in GSC as `sc-domain:dropaudit.co` and submit the sitemap.
 - **Result:** TBD — review 2026-06-19
 - **Learning:** TBD
+
+## 2026-10-06 — Legal/trust pages + claim cleanup as an indexable-surface and credibility bet
+- **Status:** active
+- **Hypothesis:** Two new indexable pages (`/privacy`, `/security`) plus a
+  45-day cycle countdown give the site crawlable surface it did not have, and
+  removing unbacked product claims makes the pages survive scrutiny by the one
+  reader who matters — a data broker's counsel, who will read `/security`
+  before replying to cold outreach. A page that openly says "pre-launch, not
+  yet accepting customer data" should convert better than one that overclaims
+  and gets caught, because the buying objection here is trust, not features.
+- **KPI:** indexed-page count (expect 8 vs. the previous 6); impressions on
+  statute/bill-number queries (`SB 361`, `DROP platform`, `11 CCR 7612`);
+  any reply rate on outreach that links `/security`.
+- **Baseline:** not measurable yet — the GSC property is still unverified, so
+  this site has no observable search data at all. See `AI_AGENTS.md §
+  Post-deploy checklist`; verifying `sc-domain:dropaudit.co` is the blocker for
+  every KPI above and should happen before the review date.
+- **Action:** Shipped `/privacy` + `/security` (footer-linked, previously `#`),
+  `CycleCountdown` on `lib/dropCycle.ts`, IndexNow key tracked. Resolved all 21
+  `<Fill>` placeholders — 6 as sourced facts, 15 as explicit "will be published
+  before launch" statements. Rewired both fake-submit forms to `mailto:`.
+  Removed: Enterprise SSO/SCIM claims, "US-only data residency … ever",
+  per-plan customer-managed encryption, "Most popular" badge, "US-based
+  support", an unverified San Francisco HQ, and both price figures.
+- **Result:** TBD — review 2026-11-03
+- **Learning:** TBD

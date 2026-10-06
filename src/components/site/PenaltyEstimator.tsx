@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { z } from "zod";
 
+const CONTACT_EMAIL = "hello@dropaudit.co";
+
 type Props = {
   source?: string;
 };
@@ -23,7 +25,6 @@ export function PenaltyEstimator({ source = "homepage_estimator" }: Props) {
   const [days, setDays] = useState<number | "">(14);
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const exposure = useMemo(() => {
@@ -42,7 +43,9 @@ export function PenaltyEstimator({ source = "homepage_estimator" }: Props) {
     [exposure],
   );
 
-  async function handleSubmit(e: React.FormEvent) {
+  // No backend: submitting hands the snapshot to the visitor's own mail client so the
+  // request actually reaches us. Don't swap this for a fake success state.
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const parsed = leadSchema.safeParse({
@@ -57,19 +60,29 @@ export function PenaltyEstimator({ source = "homepage_estimator" }: Props) {
       return;
     }
 
-    setSubmitting(true);
-    // TODO: re-wire to a real backend (see src/lib/server-todo.md).
-    // Original used supabase.from('penalty_estimator_leads').insert(...).
-    setTimeout(() => {
-      console.log("[PenaltyEstimator] would submit lead", {
-        ...parsed.data,
-        estimated_exposure_cents: exposure * 100,
-        source,
-      });
-      setSubmitted(true);
-      setSubmitting(false);
-      toast.success("Got it. Your DROP exposure summary is on the way.");
-    }, 500);
+    const { email, company: co, unresolved_requests, days_overdue } = parsed.data;
+    const lines = [
+      "I would like a written DROP exposure summary.",
+      "",
+      `Work email: ${email}`,
+    ];
+    if (co) lines.push(`Company: ${co}`);
+    lines.push(
+      `Unresolved deletion requests: ${unresolved_requests}`,
+      `Average days overdue: ${days_overdue}`,
+      `Estimated exposure at $200/request/day: ${formatted}`,
+      "",
+      `(from ${source})`,
+    );
+
+    const href =
+      `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(`DROP exposure summary request — ${formatted}`)}` +
+      `&body=${encodeURIComponent(lines.join("\n"))}`;
+
+    window.location.href = href;
+    setSubmitted(true);
+    toast.success("Opening your email app with your exposure snapshot.");
   }
 
   return (
@@ -128,10 +141,14 @@ export function PenaltyEstimator({ source = "homepage_estimator" }: Props) {
             <div className="flex items-start gap-3 rounded-lg border border-success/30 bg-success/10 p-4 text-sm">
               <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" />
               <div>
-                <div className="font-semibold text-foreground">You're on the list.</div>
+                <div className="font-semibold text-foreground">Your email app should be open.</div>
                 <div className="mt-1 text-muted-foreground">
-                  We've logged your exposure snapshot and will email a detailed summary
-                  with a 30-day remediation roadmap within one business day.
+                  Your exposure snapshot is prefilled in a message to{" "}
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="underline hover:text-foreground">
+                    {CONTACT_EMAIL}
+                  </a>
+                  . Nothing was sent from this page — send the email and we'll reply with a
+                  written summary.
                 </div>
               </div>
             </div>
@@ -163,11 +180,12 @@ export function PenaltyEstimator({ source = "homepage_estimator" }: Props) {
                   />
                 </div>
               </div>
-              <Button type="submit" size="lg" disabled={submitting} className="w-full">
-                {submitting ? "Sending…" : "Send my exposure summary"}
+              <Button type="submit" size="lg" className="w-full">
+                Request a written summary
               </Button>
               <p className="text-xs text-muted-foreground">
-                We'll never share your email. Estimate only — not legal advice.
+                This opens your own email app with the figures above prefilled — nothing is
+                sent from this page. Estimate only — not legal advice.
               </p>
             </>
           )}

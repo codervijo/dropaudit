@@ -92,8 +92,8 @@ export function ChecklistPage() {
             DROP Readiness Checklist
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
-            20 items across 5 domains. Score your readiness for the California DROP /
-            Delete Act deadline on August 1, 2026.
+            20 items across 5 domains. Score your compliance posture under the California
+            DROP / Delete Act, enforced since August 1, 2026.
           </p>
         </div>
       </section>

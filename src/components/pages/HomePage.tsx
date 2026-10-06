@@ -14,6 +14,7 @@ import {
   ClipboardList,
   CalendarDays,
   Activity,
+  KeyRound,
 } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { SectionHeader } from "@/components/site/SectionHeader";
@@ -21,12 +22,13 @@ import { PricingSection } from "@/components/site/PricingSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PenaltyEstimator } from "@/components/site/PenaltyEstimator";
+import { CycleCountdown } from "@/components/site/CycleCountdown";
 
 const pains = [
   {
     icon: CalendarClock,
-    title: "August 1, 2026 deadline",
-    body: "Registered California data brokers must begin honoring DROP deletion requests on the first business day of August 2026.",
+    title: "Enforcement is live",
+    body: "Since August 1, 2026, registered California data brokers must access DROP at least once every 45 calendar days and process the deletion requests they download.",
   },
   {
     icon: AlertTriangle,
@@ -46,7 +48,7 @@ const pains = [
 ];
 
 const steps = [
-  { icon: Database, title: "Import the DROP list", body: "Pull the CPPA DROP deletion list via secure upload or API on every 45-day cycle." },
+  { icon: Database, title: "Import your DROP list", body: "You authenticate to DROP with your own credentials and export your cycle list. DropAudit ingests it and runs everything downstream. We never access DROP." },
   { icon: ListChecks, title: "Match identifiers", body: "Run hashed identifier matching against your internal systems, CRMs, and warehouses." },
   { icon: ClipboardList, title: "Generate deletion tasks", body: "Auto-create deletion and suppression tasks with owners, SLAs, and approval gates." },
   { icon: Network, title: "Route to vendors", body: "Dispatch deletion instructions to downstream service providers and track acknowledgments." },
@@ -73,17 +75,22 @@ export function HomePage() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-white/80 backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              California DROP / Delete Act · Effective Aug 1, 2026
+              California DROP / Delete Act · Enforced since Aug 1, 2026
             </div>
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-              Be DROP-ready before August 1.
+              DROP enforcement is live. Don't miss a cycle.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-balance text-base text-white/75 md:text-lg">
               A compliance operations layer for California data brokers handling DROP
               deletion requests, suppression lists, service-provider routing, status
               reporting, and audit evidence.
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <CycleCountdown />
+            <p className="mx-auto mt-3 max-w-md text-xs text-white/50">
+              Counted in 45-day intervals from August 1, 2026. Your own deadline is 45
+              calendar days after your last DROP access.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button asChild size="lg">
                 <a href="/checklist">
                   Run DROP Readiness Check <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -96,7 +103,7 @@ export function HomePage() {
 
             <div className="mt-14 grid grid-cols-3 gap-4 border-t border-white/10 pt-8 text-left md:gap-8">
               {[
-                ["Aug 1, 2026", "DROP enforcement begins"],
+                ["Aug 1, 2026", "DROP enforcement began"],
                 ["Every 45 days", "Mandated re-check cycle"],
                 ["$200 / day", "Per unresolved request"],
               ].map(([k, v]) => (
@@ -138,7 +145,7 @@ export function HomePage() {
       <section className="bg-secondary/40 py-20 md:py-28">
         <div className="container mx-auto px-4">
           <SectionHeader
-            eyebrow="How DROPShield works"
+            eyebrow="How DropAudit works"
             title="Five steps from raw DROP list to audit-ready evidence."
             sub="A purpose-built workflow that operationalizes every CPPA requirement, without forcing your engineering team to build it from scratch."
           />
@@ -160,6 +167,21 @@ export function HomePage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          <div className="mx-auto mt-10 flex max-w-3xl flex-col gap-4 rounded-2xl border border-border bg-card p-6 shadow-card sm:flex-row sm:items-start md:p-8">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
+              <KeyRound className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 className="text-base font-semibold">Your DROP credentials never leave your team.</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                DropAudit never logs in to DROP, never holds your DROP credentials, and never
+                connects to DROP on your behalf. California's DROP regulations require you to
+                restrict credential access and make you responsible for every action taken
+                through your DROP account (11 CCR §7610(a)(1)). DropAudit is built for that
+                reality: you hold the credentials, we run the compliance operation around them.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -233,7 +255,7 @@ export function HomePage() {
             </h2>
             <p className="mt-4 text-muted-foreground">
               If you're a 10–200 person broker with a registered status and a small
-              compliance team, DROPShield gives you the operational backbone you'd
+              compliance team, DropAudit gives you the operational backbone you'd
               otherwise need to build from scratch — without hiring a six-person
               privacy engineering org.
             </p>
@@ -248,11 +270,11 @@ export function HomePage() {
       <section className="bg-navy py-20 text-navy-foreground md:py-28">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mx-auto max-w-2xl text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-            Know your DROP exposure before August 1.
+            Know your DROP exposure before your next cycle closes.
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-white/70">
             Run a free readiness check today. 15 minutes of input, a clear picture of
-            where you stand before the deadline.
+            where you stand before your next 45-day deadline.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg">

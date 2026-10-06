@@ -7,11 +7,11 @@ export function PricingSection() {
   const tiers = [
     {
       name: "Starter",
-      price: "$499",
-      cadence: "/mo",
+      price: "Contact us",
+      cadence: "",
       tagline: "DROP readiness + tracker",
       features: [
-        "DROP list intake (manual & API)",
+        "DROP list intake (planned: file upload & ingestion API)",
         "Deletion request tracker",
         "45-day cycle scheduling",
         "Basic status dashboard",
@@ -22,8 +22,8 @@ export function PricingSection() {
     },
     {
       name: "Compliance",
-      price: "$1,499",
-      cadence: "/mo",
+      price: "Contact us",
+      cadence: "",
       tagline: "Suppression + vendor routing + audit exports",
       features: [
         "Everything in Starter",
@@ -33,7 +33,7 @@ export function PricingSection() {
         "Penalty exposure dashboard",
         "Up to 10 users",
       ],
-      cta: "Talk to sales",
+      cta: "Talk to us",
       to: "/contact",
       highlight: true,
     },
@@ -45,7 +45,6 @@ export function PricingSection() {
       features: [
         "Everything in Compliance",
         "Direct integrations with warehouses & CDPs",
-        "SAML SSO, SCIM, custom roles",
         "Dedicated compliance engineer",
         "Custom evidence packs & DPA support",
       ],
@@ -60,8 +59,14 @@ export function PricingSection() {
         <SectionHeader
           eyebrow="Pricing"
           title="Predictable pricing for serious compliance programs."
-          sub="Annual contracts available. All plans include unlimited DROP cycles, secure data handling, and US-based support."
+          sub="All plans include unlimited 45-day DROP cycles."
         />
+        <div className="mx-auto mt-10 max-w-3xl rounded-lg border border-border bg-card p-5 text-sm text-muted-foreground">
+          <strong className="text-foreground">Status:</strong> DropAudit is pre-launch and
+          is not yet accepting customer data or payment. These are planned tiers and
+          pricing is not set — the feature sets below describe what each tier is intended to
+          include, not what ships today.
+        </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {tiers.map((t) => (
             <Card
@@ -71,16 +76,18 @@ export function PricingSection() {
                 (t.highlight ? "border-primary/40 ring-2 ring-primary/20" : "")
               }
             >
-              {t.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
-                  Most popular
-                </div>
-              )}
               <CardContent className="p-8">
                 <h3 className="text-lg font-semibold">{t.name}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{t.tagline}</p>
                 <div className="mt-6 flex items-baseline gap-1">
-                  <span className="text-4xl font-semibold tracking-tight">{t.price}</span>
+                  <span
+                    className={
+                      "font-semibold tracking-tight " +
+                      (t.price.startsWith("$") ? "text-4xl" : "text-2xl")
+                    }
+                  >
+                    {t.price}
+                  </span>
                   <span className="text-sm text-muted-foreground">{t.cadence}</span>
                 </div>
                 <Button asChild className="mt-6 w-full" variant={t.highlight ? "default" : "outline"}>

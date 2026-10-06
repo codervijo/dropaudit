@@ -24,7 +24,7 @@ export function CalculatorPage() {
 
       <section className="py-16">
         <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-2 lg:items-start">
-          <PenaltyEstimator />
+          <PenaltyEstimator source="calculator_page" />
           <div className="space-y-6">
             <Card className="shadow-card">
               <CardContent className="p-6">
@@ -56,9 +56,9 @@ export function CalculatorPage() {
             </Card>
             <Card className="shadow-card">
               <CardContent className="p-6">
-                <h2 className="text-lg font-semibold">Reduce exposure with DROPShield</h2>
+                <h2 className="text-lg font-semibold">Reduce exposure with DropAudit</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  DROPShield closes open requests faster by automating intake, matching,
+                  DropAudit closes open requests faster by automating intake, matching,
                   routing, and evidence — directly reducing the days-overdue multiplier.
                 </p>
                 <Button asChild className="mt-4">

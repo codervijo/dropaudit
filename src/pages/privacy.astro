@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { PrivacyPage } from "@/components/pages/PrivacyPage";
+---
+<BaseLayout
+  title="Privacy Policy — DropAudit"
+  description="How DropAudit handles personal information as a business for site visitors and customer contacts, and as a service provider for customer data."
+  ogTitle="DropAudit privacy policy"
+  ogDescription="Controller and service-provider roles, what we collect, and your rights."
+  path="/privacy"
+>
+  <PrivacyPage client:load />
+</BaseLayout>

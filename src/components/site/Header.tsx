@@ -19,7 +19,7 @@ export function Header({ pathname = "/" }: { pathname?: string }) {
           <span className="grid h-8 w-8 place-items-center rounded-md bg-navy text-navy-foreground">
             <Shield className="h-4 w-4" />
           </span>
-          <span>DROPShield</span>
+          <span>DropAudit</span>
         </a>
         <nav className="hidden items-center gap-7 md:flex">
           {nav.map((n) => {

@@ -10,7 +10,6 @@ import {
   FileDown,
   Shield,
   Lock,
-  ServerCog,
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
@@ -18,9 +17,9 @@ import {
 const steps = [
   {
     icon: Database,
-    title: "1. Import or receive deletion request list",
-    body: "Securely ingest the CPPA DROP list via signed API, SFTP, or scheduled import on every 45-day cycle. Hashed identifiers only — never raw PII in transit.",
-    bullets: ["Scheduled cycle ingestion", "Signed payload verification", "Identifier-only data model"],
+    title: "1. Receive your DROP deletion list",
+    body: "You authenticate to DROP with your own credentials and download your deletion list each cycle, then send it to DropAudit. Planned intake paths are file upload, SFTP, and a signed ingestion API. We never access DROP, and the data model is designed for hashed identifiers only — never raw PII in transit.",
+    bullets: ["You retrieve, we ingest", "Signed payload verification", "Identifier-only data model"],
   },
   {
     icon: ListChecks,
@@ -49,9 +48,8 @@ const steps = [
 ];
 
 const trust = [
-  { icon: Lock, title: "SOC 2 architecture", body: "Designed to SOC 2 Type II controls. Customer-managed encryption available on Enterprise." },
-  { icon: ServerCog, title: "US-only data residency", body: "All processing in US regions. No cross-border data movement, ever." },
-  { icon: Shield, title: "Identifier-only model", body: "We work in hashes. We don't store raw consumer PII — your data stays in your stack." },
+  { icon: Lock, title: "SOC 2 architecture", body: "Designed against SOC 2 Type II controls. DropAudit is not SOC 2 certified today — see the Security page for current status." },
+  { icon: Shield, title: "Identifier-only model", body: "Designed to work in hashes, so raw consumer PII stays in your stack." },
 ];
 
 export function ProductPage() {
@@ -66,9 +64,19 @@ export function ProductPage() {
             The DROP workflow, operationalized end-to-end.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
-            DROPShield turns the California Delete Act's recurring obligations into a
+            DropAudit turns the California Delete Act's recurring obligations into a
             structured, audit-ready operating system for your privacy and compliance team.
           </p>
+        </div>
+      </section>
+
+      <section className="pt-10">
+        <div className="container mx-auto max-w-4xl px-4">
+          <div className="rounded-lg border border-border bg-secondary/40 p-5 text-sm text-muted-foreground">
+            <strong className="text-foreground">Status:</strong> DropAudit is pre-launch.
+            This page describes the workflow we are building, not a shipped product — we are
+            not yet accepting customer data. Talk to us if you want to shape it.
+          </div>
         </div>
       </section>
 
@@ -102,9 +110,9 @@ export function ProductPage() {
         <div className="container mx-auto px-4">
           <SectionHeader
             eyebrow="Security & trust"
-            title="A platform privacy teams can defend in front of the CPPA."
+            title="Built to be defensible in front of the CPPA."
           />
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
             {trust.map((t) => (
               <Card key={t.title} className="shadow-card">
                 <CardContent className="p-6">
@@ -123,7 +131,7 @@ export function ProductPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-            Ready to see DROPShield against your stack?
+            Ready to see DropAudit against your stack?
           </h2>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg">

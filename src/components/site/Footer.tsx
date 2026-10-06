@@ -9,11 +9,11 @@ export function Footer() {
             <span className="grid h-8 w-8 place-items-center rounded-md bg-white/10">
               <Shield className="h-4 w-4" />
             </span>
-            DROPShield
+            DropAudit
           </a>
           <p className="mt-4 max-w-sm text-sm text-white/65">
-            Compliance operations for California-registered data brokers preparing
-            for the DROP / Delete Act deletion mandate.
+            Compliance operations for California-registered data brokers operating
+            under the DROP / Delete Act deletion mandate.
           </p>
           <p className="mt-4 text-xs text-white/45">dropaudit.co</p>
         </div>
@@ -34,16 +34,16 @@ export function Footer() {
           </div>
           <ul className="space-y-2 text-sm text-white/75">
             <li><a href="/contact" className="hover:text-white">Contact</a></li>
-            <li><a href="#" className="hover:text-white">Security</a></li>
-            <li><a href="#" className="hover:text-white">Privacy</a></li>
+            <li><a href="/security" className="hover:text-white">Security</a></li>
+            <li><a href="/privacy" className="hover:text-white">Privacy</a></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col items-start justify-between gap-2 px-4 py-5 text-xs text-white/50 md:flex-row md:items-center">
-          <span>© {new Date().getFullYear()} DROPShield. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} DropAudit. All rights reserved.</span>
           <span>
-            Not legal advice. DROPShield is a compliance operations platform.
+            Not legal advice. DropAudit is a compliance operations platform.
           </span>
         </div>
       </div>

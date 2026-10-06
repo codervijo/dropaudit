@@ -11,6 +11,10 @@ custom_domains = [
     "dropaudit.co",
 ]
 
+[index]
+indexnow_key = "d8823e781482e5b261144830913c67d8"
+indexnow_enabled = true
+
 [stack]
 framework = "astro"
 

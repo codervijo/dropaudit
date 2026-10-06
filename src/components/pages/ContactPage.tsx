@@ -4,10 +4,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, ShieldCheck } from "lucide-react";
+import { Mail, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
+
+const CONTACT_EMAIL = "hello@dropaudit.co";
+const SECURITY_EMAIL = "security@dropaudit.co";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Required").max(100),
@@ -19,12 +22,13 @@ const schema = z.object({
 
 export function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", company: "", role: "", message: "" });
-  const [submitting, setSubmitting] = useState(false);
 
   function update<K extends keyof typeof form>(k: K, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
+  // No backend: submitting hands the message to the visitor's own mail client so
+  // the inquiry actually reaches us. Don't swap this for a fake success state.
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
@@ -32,12 +36,18 @@ export function ContactPage() {
       toast.error(parsed.error.issues[0]?.message ?? "Invalid input");
       return;
     }
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast.success("Thanks — a compliance specialist will reach out within one business day.");
-      setForm({ name: "", email: "", company: "", role: "", message: "" });
-    }, 600);
+    const { name, email, company, role, message } = parsed.data;
+    const lines = [`Name: ${name}`, `Work email: ${email}`, `Company: ${company}`];
+    if (role) lines.push(`Role: ${role}`);
+    lines.push("", message);
+
+    const href =
+      `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(`DROP inquiry — ${company}`)}` +
+      `&body=${encodeURIComponent(lines.join("\n"))}`;
+
+    window.location.href = href;
+    toast.success("Opening your email app with this message ready to send.");
   }
 
   return (
@@ -61,20 +71,15 @@ export function ContactPage() {
             <div className="rounded-lg border border-border bg-card p-6 shadow-card">
               <Mail className="h-5 w-5 text-primary" />
               <div className="mt-3 text-sm font-semibold">Email</div>
-              <a href="mailto:hello@dropaudit.co" className="text-sm text-muted-foreground hover:text-foreground">
-                hello@dropaudit.co
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-sm text-muted-foreground hover:text-foreground">
+                {CONTACT_EMAIL}
               </a>
-            </div>
-            <div className="rounded-lg border border-border bg-card p-6 shadow-card">
-              <MapPin className="h-5 w-5 text-primary" />
-              <div className="mt-3 text-sm font-semibold">Headquarters</div>
-              <div className="text-sm text-muted-foreground">San Francisco, California</div>
             </div>
             <div className="rounded-lg border border-border bg-card p-6 shadow-card">
               <ShieldCheck className="h-5 w-5 text-success" />
               <div className="mt-3 text-sm font-semibold">Security inquiries</div>
-              <a href="mailto:security@dropaudit.co" className="text-sm text-muted-foreground hover:text-foreground">
-                security@dropaudit.co
+              <a href={`mailto:${SECURITY_EMAIL}`} className="text-sm text-muted-foreground hover:text-foreground">
+                {SECURITY_EMAIL}
               </a>
             </div>
           </div>
@@ -106,9 +111,17 @@ export function ContactPage() {
                   <Label htmlFor="message">How can we help?</Label>
                   <Textarea id="message" rows={5} value={form.message} onChange={(e) => update("message", e.target.value)} className="mt-1.5" maxLength={1500} />
                 </div>
-                <Button type="submit" size="lg" disabled={submitting} className="w-full sm:w-auto">
-                  {submitting ? "Sending…" : "Send message"}
+                <Button type="submit" size="lg" className="w-full sm:w-auto">
+                  Open email draft
                 </Button>
+                <p className="text-xs text-muted-foreground">
+                  This opens your own email app with the message prefilled — nothing is
+                  sent from this page. If it doesn't open, email{" "}
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="underline hover:text-foreground">
+                    {CONTACT_EMAIL}
+                  </a>{" "}
+                  directly.
+                </p>
               </form>
             </CardContent>
           </Card>

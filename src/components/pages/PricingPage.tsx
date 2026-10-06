@@ -25,8 +25,8 @@ export function PricingPage() {
           <div className="mt-8 space-y-6">
             {[
               {
-                q: "When do DROP obligations actually begin?",
-                a: "The California Privacy Protection Agency requires registered data brokers to begin honoring DROP deletion requests starting August 1, 2026.",
+                q: "When did DROP obligations begin?",
+                a: "August 1, 2026. Since then, registered data brokers must access DROP at least once every 45 calendar days and process the deletion requests they download.",
               },
               {
                 q: "How often do we need to re-check the DROP list?",
@@ -34,11 +34,11 @@ export function PricingPage() {
               },
               {
                 q: "Do you store our consumer PII?",
-                a: "No. DROPShield works with hashed identifiers. Raw PII stays inside your systems.",
+                a: "No. DropAudit is designed to work with hashed identifiers, so raw PII stays inside your systems. The service is pre-launch and is not processing customer data yet — see the Security page for how this is documented.",
               },
               {
-                q: "Can we start before August 1, 2026?",
-                a: "Yes — and you should. Readiness, vendor mapping, and dry-run cycles take time. We recommend onboarding at least 90 days before the deadline.",
+                q: "Enforcement has started. Is it too late to onboard?",
+                a: "No. DROP obligations recur every 45 days, so each cycle run through a documented process counts. DropAudit can't change cycles already past — talk to your counsel about any you've missed.",
               },
             ].map((f) => (
               <div key={f.q} className="rounded-lg border border-border bg-card p-6 shadow-card">

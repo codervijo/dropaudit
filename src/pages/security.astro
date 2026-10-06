@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SecurityPage } from "@/components/pages/SecurityPage";
+---
+<BaseLayout
+  title="Security — DropAudit"
+  description="How DropAudit hosts, encrypts, and controls access to customer data, our subprocessors, retention, SOC 2 status — and why we never access DROP."
+  ogTitle="DropAudit security"
+  ogDescription="Hosting, encryption, identifier hashing, access controls, retention, subprocessors, and SOC 2 status."
+  path="/security"
+>
+  <SecurityPage client:load />
+</BaseLayout>

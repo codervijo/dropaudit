@@ -29,10 +29,15 @@ Supabase server/client integration:
 - `types.ts` — generated DB types
 
 The `PenaltyEstimator` form was previously inserting into a
-`penalty_estimator_leads` table on submit. In the ported version, submission
-is a no-op stub (logs to console + shows success toast) so the form remains
-visually and behaviorally complete. Re-wire to a real backend (Supabase,
-Astro server endpoint, third-party form, etc.) when ready.
+`penalty_estimator_leads` table on submit. It now hands the snapshot to the
+visitor's own mail client via `mailto:` instead — the exposure figure is
+computed in the browser and nothing is transmitted from the page. The contact
+form (`ContactPage.tsx`) works the same way.
+
+If you wire either form to a real backend (Supabase, Astro server endpoint,
+third-party form, etc.), `/privacy` §2 and `/security` must be updated in the
+same commit: §2 currently states that these forms send nothing from the page,
+and the subprocessor section states there are none.
 
 ## TODO: `genai/src/lib/error-page.ts` and `genai/src/lib/error-capture.ts`
 TanStack-specific error boundaries. Replace with Astro's `src/pages/404.astro`
