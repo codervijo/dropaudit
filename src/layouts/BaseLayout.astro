@@ -1,4 +1,5 @@
 ---
+import Analytics from "../components/Analytics.astro";
 import "@/styles/global.css";
 
 const site = "https://dropaudit.co";
@@ -71,6 +72,7 @@ const canonical = new URL(path, site).toString();
   ]
 }
     </script>
+    <Analytics />
   </head>
   <body>
     <slot />

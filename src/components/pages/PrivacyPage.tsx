@@ -173,6 +173,7 @@ export function PrivacyPage() {
               We will post any changes to this policy on this page and update the effective
               date. Questions: <a href="mailto:hello@dropaudit.co">hello@dropaudit.co</a>
             </p>
+            <p>This site uses Google Analytics 4 to count visits and see which pages are read. Google Analytics sets cookies and receives your browser, device and approximate location; see <a href="https://policies.google.com/technologies/partner-sites">how Google uses this data</a>.</p>
           </LegalSection>
         </div>
       </section>
