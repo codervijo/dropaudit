@@ -13,7 +13,7 @@ export function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-muted-foreground">
-            Effective October 6, 2026
+            Effective November 9, 2026
           </p>
         </div>
       </section>
@@ -56,6 +56,15 @@ export function PrivacyPage() {
                 data such as IP address, browser user agent, and pages requested, and may
                 set strictly necessary security cookies. Our pages load fonts from Google
                 Fonts, which receives your IP address and browser details.
+              </li>
+              <li>
+                <strong>Usage analytics:</strong> we use Google Analytics 4 to count visits
+                and see which pages are read. Google Analytics sets cookies and receives your
+                browser, device, and approximate location; see{" "}
+                <a href="https://policies.google.com/technologies/partner-sites">
+                  how Google uses this data
+                </a>
+                .
               </li>
             </ul>
             <p>We do not use advertising cookies or cross-site tracking on dropaudit.co.</p>
@@ -173,7 +182,6 @@ export function PrivacyPage() {
               We will post any changes to this policy on this page and update the effective
               date. Questions: <a href="mailto:hello@dropaudit.co">hello@dropaudit.co</a>
             </p>
-            <p>This site uses Google Analytics 4 to count visits and see which pages are read. Google Analytics sets cookies and receives your browser, device and approximate location; see <a href="https://policies.google.com/technologies/partner-sites">how Google uses this data</a>.</p>
           </LegalSection>
         </div>
       </section>
