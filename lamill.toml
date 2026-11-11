@@ -15,6 +15,10 @@ custom_domains = [
 indexnow_key = "d8823e781482e5b261144830913c67d8"
 indexnow_enabled = true
 
+[email]
+# hello@ is always forwarded (v50); extra local parts published on the site:
+addresses = ["security"]
+
 [analytics]
 ga4_id = "G-K88FGN3CKV"
 
